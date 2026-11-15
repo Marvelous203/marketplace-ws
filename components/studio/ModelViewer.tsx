@@ -17,7 +17,7 @@ interface ModelViewerProps {
   onSelectCategory?: (cat: 'tops' | 'bottoms' | 'full' | 'shoes' | 'acc') => void;
 }
 
-const BASE_MODEL_IMAGE = '/models/base-character.jpg';
+const BASE_MODEL_IMAGE = '/models/base-character.png';
 
 export default function ModelViewer({
   looks,
