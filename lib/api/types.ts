@@ -71,6 +71,57 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/products/layers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List all dynamic mix-and-match layer products */
+        get: operations["ProductsController_findAllLayers"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/products/pieces": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List all mix-and-match clothing pieces (seed + user uploaded) */
+        get: operations["ProductsController_findAllPieces"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/products/outfits": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List all curated outfit sets / presets */
+        get: operations["ProductsController_findAllOutfits"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/products/{id}": {
         parameters: {
             query?: never;
@@ -82,6 +133,57 @@ export interface paths {
         get: operations["ProductsController_findOne"];
         put?: never;
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/products/upload": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Upload a mix-and-match product layer with transparent image and thumbnail */
+        post: operations["ProductsController_uploadProduct"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/products/upload-piece": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Upload an individual clothing piece (thumbnail 300x300 + transparent layer 1360x2048) */
+        post: operations["ProductsController_uploadPiece"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/products/upload-outfit": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Upload an outfit preset referencing existing piece IDs (no layer images needed) */
+        post: operations["ProductsController_uploadOutfit"];
         delete?: never;
         options?: never;
         head?: never;
@@ -202,6 +304,78 @@ export interface components {
              *     }
              */
             meta: Record<string, never>;
+        };
+        ProductLayerResponseDto: {
+            /** @example layer-prod-8a2b3c4d */
+            id: string;
+            /** @example Ribbed Crop Tank */
+            name: string;
+            /**
+             * @example TOP
+             * @enum {string}
+             */
+            category: "TOP" | "BOTTOM" | "DRESS" | "OUTERWEAR" | "SHOES" | "ACCESSORY";
+            /** @example 30 */
+            layerZIndex: number;
+            /** @example 950000 */
+            priceVND: number;
+            /** @example Charcoal */
+            color?: string;
+            /**
+             * @example [
+             *       "DRESS"
+             *     ]
+             */
+            excludes: ("TOP" | "BOTTOM" | "DRESS" | "OUTERWEAR" | "SHOES" | "ACCESSORY")[];
+            /** @example /uploads/images/layer-prod-1.png */
+            imageUrl: string;
+            /** @example /uploads/thumbnails/layer-prod-1-thumb.png */
+            thumbnailUrl: string;
+            /** @example 2026-11-13T04:40:00.000Z */
+            createdAt: string;
+        };
+        PieceResponseDto: {
+            /** @example piece-8f1c997e */
+            id: string;
+            /** @example Ribbed Crop Tank */
+            name: string;
+            /**
+             * @example top
+             * @enum {string}
+             */
+            type: "top" | "bottom" | "dress" | "shoes" | "acc";
+            /** @example /uploads/thumb-3357fc7c.png */
+            thumbnailUrl: string;
+            /** @example /uploads/layer-3357fc7c.png */
+            layerUrl: string;
+            /** @example 30 */
+            zIndex: number;
+            /** @example 950000 */
+            priceVND: number;
+            /** @example Charcoal */
+            color?: string;
+            /** @example 2026-11-13T12:00:00.000Z */
+            createdAt: string;
+        };
+        OutfitResponseDto: {
+            /** @example outfit-5a3d1b7e */
+            id: string;
+            /** @example Denim Chic Look */
+            name: string;
+            /** @example /uploads/outfit-thumb-5a3d1b7e.png */
+            thumbnailUrl: string;
+            /**
+             * @example [
+             *       "piece-0-top",
+             *       "piece-0-bot",
+             *       "piece-0-sho"
+             *     ]
+             */
+            pieceIds: string[];
+            /** @example 15 */
+            discountPercent: number;
+            /** @example 2026-11-13T12:00:00.000Z */
+            createdAt: string;
         };
         OrderItemDto: {
             /**
@@ -414,6 +588,66 @@ export interface operations {
             };
         };
     };
+    ProductsController_findAllLayers: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of layer products */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProductLayerResponseDto"][];
+                };
+            };
+        };
+    };
+    ProductsController_findAllPieces: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of individual clothing pieces with Z-index and layer URLs */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PieceResponseDto"][];
+                };
+            };
+        };
+    };
+    ProductsController_findAllOutfits: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of outfit presets referencing piece IDs */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OutfitResponseDto"][];
+                };
+            };
+        };
+    };
     ProductsController_findOne: {
         parameters: {
             query?: never;
@@ -441,6 +675,154 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+        };
+    };
+    ProductsController_uploadProduct: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Product layer image assets & metadata */
+        requestBody: {
+            content: {
+                "multipart/form-data": {
+                    /** @example Ribbed Crop Tank */
+                    name: string;
+                    /**
+                     * @example TOP
+                     * @enum {string}
+                     */
+                    category: "TOP" | "BOTTOM" | "DRESS" | "OUTERWEAR" | "SHOES" | "ACCESSORY";
+                    /** @example 30 */
+                    layerZIndex?: number;
+                    /** @example 950000 */
+                    priceVND: number;
+                    /** @example Charcoal */
+                    color?: string;
+                    /**
+                     * @example [
+                     *       "DRESS"
+                     *     ]
+                     */
+                    excludes?: ("TOP" | "BOTTOM" | "DRESS" | "OUTERWEAR" | "SHOES" | "ACCESSORY")[];
+                    /**
+                     * Format: binary
+                     * @description Transparent PNG/WebP canvas image (e.g. 1360x2048)
+                     */
+                    image?: string;
+                    /**
+                     * Format: binary
+                     * @description Menu icon thumbnail (e.g. 360x360)
+                     */
+                    thumbnail?: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Product layer created and image stored successfully */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProductLayerResponseDto"];
+                };
+            };
+        };
+    };
+    ProductsController_uploadPiece: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Clothing piece files and metadata */
+        requestBody: {
+            content: {
+                "multipart/form-data": {
+                    /** @example Ribbed Crop Tank */
+                    name: string;
+                    /**
+                     * @example top
+                     * @enum {string}
+                     */
+                    type: "top" | "bottom" | "dress" | "shoes" | "acc";
+                    /** @example 950000 */
+                    priceVND: number;
+                    /** @example Charcoal */
+                    color?: string;
+                    /**
+                     * Format: binary
+                     * @description 300x300px square thumbnail image
+                     */
+                    thumbnail?: string;
+                    /**
+                     * Format: binary
+                     * @description 1360x2048px transparent PNG/WebP canvas image
+                     */
+                    layer?: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Individual piece uploaded and registered with automatic Z-Index */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PieceResponseDto"];
+                };
+            };
+        };
+    };
+    ProductsController_uploadOutfit: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Outfit cover thumbnail and list of piece IDs */
+        requestBody: {
+            content: {
+                "multipart/form-data": {
+                    /** @example Denim Chic Look */
+                    name: string;
+                    /**
+                     * @example [
+                     *       "piece-top-denim",
+                     *       "piece-bot-maxi",
+                     *       "piece-shoes-boots"
+                     *     ]
+                     */
+                    pieceIds: string[];
+                    /**
+                     * @default 15
+                     * @example 15
+                     */
+                    discountPercent?: number;
+                    /**
+                     * Format: binary
+                     * @description Set cover thumbnail image
+                     */
+                    thumbnail?: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Outfit preset created successfully */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OutfitResponseDto"];
+                };
             };
         };
     };

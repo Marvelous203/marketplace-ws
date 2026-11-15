@@ -122,9 +122,6 @@ export function ProductDetailClient({
               <Link href="/" className="hover:text-black dark:hover:text-white transition">
                 Phòng Thử Đồ (Studio)
               </Link>
-              <Link href="/shop" className="hover:text-black dark:hover:text-white transition">
-                Bộ Sưu Tập (Shop)
-              </Link>
             </nav>
           </div>
 
@@ -146,8 +143,8 @@ export function ProductDetailClient({
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-xs text-neutral-500 mb-6">
-          <Link href="/shop" className="hover:underline">
-            Cửa hàng
+          <Link href="/" className="hover:underline">
+            Phòng Thử Đồ
           </Link>
           <span>/</span>
           <span className="capitalize">{look.category}</span>

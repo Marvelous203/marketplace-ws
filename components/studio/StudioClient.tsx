@@ -15,7 +15,7 @@ import OutfitsPanel from './OutfitsPanel';
 import TunePanel from './TunePanel';
 import DnaPanel from './DnaPanel';
 import BodyPanel from './BodyPanel';
-import PersonalityPanel from './PersonalityPanel';
+import UploadStudioPanel from './UploadStudioPanel';
 import StoryPanel from './StoryPanel';
 import ControlBar from './ControlBar';
 import RealismSlider from './RealismSlider';
@@ -23,6 +23,7 @@ import FilterPanel from './FilterPanel';
 import SaveButton from './SaveButton';
 import LibraryDrawer from './LibraryDrawer';
 import CartDrawer from './CartDrawer';
+import ShopRunwayView from './ShopRunwayView';
 import Toast, { showToast } from './Toast';
 
 export default function StudioClient() {
@@ -246,16 +247,6 @@ export default function StudioClient() {
     }
 
     switch (state.activeTab) {
-      case 'DNA':
-        return (
-          <DnaPanel
-            identity={currentIdentity}
-            onReseed={() => {
-              nextIdentity();
-              triggerRescan();
-            }}
-          />
-        );
       case 'BODY':
         return (
           <BodyPanel
@@ -268,8 +259,8 @@ export default function StudioClient() {
             onRescan={triggerRescan}
           />
         );
-      case 'PERSONALITY':
-        return <PersonalityPanel />;
+      case 'UPLOAD':
+        return <UploadStudioPanel />;
       case 'STORY':
         return (
           <StoryPanel
@@ -283,9 +274,12 @@ export default function StudioClient() {
     }
   };
 
+  const isShopTab = state.activeTab === 'SHOP';
+
   return (
     <div
-      style={{ width: '100vw', height: '100vh', overflow: 'hidden' }}
+      className="studio-root"
+      style={{ width: '100vw', height: '100vh', overflow: 'hidden', position: 'fixed', inset: 0 }}
       onClick={handleStageClick}
     >
       {/* Background & Lighting Scene */}
@@ -304,19 +298,6 @@ export default function StudioClient() {
           transform: `translate(-50%, -50%) scale(${stageScale})`,
         }}
       >
-        {/* Model Avatar Viewer */}
-        <ModelViewer
-          looks={LOOKS}
-          currentLookId={state.lookId}
-          mx={state.mx}
-          height={state.height}
-          build={state.build}
-          framing={state.framing}
-          realism={state.realism}
-          scanTrigger={scanTrigger}
-          onSelectCategory={handleHotspotSelectCategory}
-        />
-
         {/* Top Navigation & Header */}
         <TopBar
           activeTab={state.activeTab}
@@ -339,26 +320,79 @@ export default function StudioClient() {
           setIsMoreOpen={setIsMoreOpen}
         />
 
-        {/* Character Profile Card */}
-        <ProfileCard
-          currentLook={currentLook}
-          identity={currentIdentity}
-          onShuffle={nextIdentity}
-          onNameChange={setCustomName}
-        />
+        {/* SHOP RUNWAY TAB VIEW */}
+        {isShopTab ? (
+          <ShopRunwayView />
+        ) : (
+          <>
+            {/* Model Avatar Viewer */}
+            <ModelViewer
+              looks={LOOKS}
+              currentLookId={state.lookId}
+              mx={state.mx}
+              height={state.height}
+              build={state.build}
+              framing={state.framing}
+              realism={state.realism}
+              scanTrigger={scanTrigger}
+              onSelectCategory={handleHotspotSelectCategory}
+            />
 
-        {/* Left Side Category Menu & Randomize */}
-        <StyleMenu
-          activeSection={state.activeSideItem}
-          onSelectSection={handleSelectSideSection}
-          onRandomize={handleRandomize}
-          isStyleTab={state.activeTab === 'STYLE'}
-        />
+            {/* Character Profile Card */}
+            <ProfileCard
+              currentLook={currentLook}
+              identity={currentIdentity}
+              onShuffle={nextIdentity}
+              onNameChange={setCustomName}
+            />
 
-        {/* Right Configuration Panel */}
-        <div id="panel" className="glass">
-          <section className="view on">{renderRightPanelContent()}</section>
-        </div>
+            {/* Left Side Category Menu & Randomize */}
+            <StyleMenu
+              activeSection={state.activeSideItem}
+              onSelectSection={handleSelectSideSection}
+              onRandomize={handleRandomize}
+              isStyleTab={state.activeTab === 'STYLE'}
+            />
+
+            {/* Right Configuration Panel */}
+            <div id="panel" className="glass">
+              <section className="view on">{renderRightPanelContent()}</section>
+            </div>
+
+            {/* Bottom Studio Controls */}
+            <ControlBar
+              canUndo={canUndo}
+              canRedo={canRedo}
+              framing={state.framing}
+              onUndo={undo}
+              onRedo={redo}
+              onCycleFraming={handleCycleFraming}
+              onReset={handleReset}
+            />
+
+            {/* Realism Slider Control */}
+            <RealismSlider
+              realism={state.realism}
+              onRealismChange={(r, commit) => update({ realism: r }, commit)}
+              onRescan={triggerRescan}
+            />
+
+            {/* Filter Palette Control */}
+            <FilterPanel
+              currentLook={currentLook}
+              currentGradeId={state.gradeId}
+              onSelectGradeId={(g) => update({ gradeId: g })}
+            />
+
+            {/* Save to Library Action */}
+            <SaveButton
+              onSave={() => {
+                saveToLibrary();
+                setIsLibraryOpen(true);
+              }}
+            />
+          </>
+        )}
 
         {/* Cart Drawer Popup */}
         <CartDrawer
@@ -376,39 +410,6 @@ export default function StudioClient() {
             update({ lookId, gradeId });
             triggerRescan();
             setIsLibraryOpen(false);
-          }}
-        />
-
-        {/* Bottom Studio Controls */}
-        <ControlBar
-          canUndo={canUndo}
-          canRedo={canRedo}
-          framing={state.framing}
-          onUndo={undo}
-          onRedo={redo}
-          onCycleFraming={handleCycleFraming}
-          onReset={handleReset}
-        />
-
-        {/* Realism Slider Control */}
-        <RealismSlider
-          realism={state.realism}
-          onRealismChange={(r, commit) => update({ realism: r }, commit)}
-          onRescan={triggerRescan}
-        />
-
-        {/* Filter Palette Control */}
-        <FilterPanel
-          currentLook={currentLook}
-          currentGradeId={state.gradeId}
-          onSelectGradeId={(g) => update({ gradeId: g })}
-        />
-
-        {/* Save to Library Action */}
-        <SaveButton
-          onSave={() => {
-            saveToLibrary();
-            setIsLibraryOpen(true);
           }}
         />
 

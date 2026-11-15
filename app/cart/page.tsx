@@ -260,7 +260,7 @@ export default function CartPage() {
 
           <div className="mt-8 flex gap-3">
             <Link
-              href="/shop"
+              href="/"
               className="px-6 py-3 rounded-xl bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 text-xs font-semibold uppercase tracking-wider hover:opacity-90 transition shadow-sm"
             >
               Tiếp tục mua sắm
@@ -286,8 +286,8 @@ export default function CartPage() {
             <Link href="/" className="text-xl font-black tracking-widest uppercase font-serif">
               VELL
             </Link>
-            <Link href="/shop" className="text-xs font-semibold uppercase tracking-wider text-neutral-600 hover:text-black">
-              Bộ Sưu Tập (Shop)
+            <Link href="/" className="text-xs font-semibold uppercase tracking-wider text-neutral-600 hover:text-black">
+              Phòng Thử Đồ (Studio)
             </Link>
           </div>
         </header>
@@ -300,13 +300,13 @@ export default function CartPage() {
           </div>
           <h2 className="text-xl font-bold font-serif">Giỏ hàng trống</h2>
           <p className="text-xs text-neutral-500 max-w-sm mt-1 mb-6">
-            Bạn chưa chọn món đồ nào vào giỏ. Hãy ghé qua cửa hàng để tìm trang phục phù hợp với phong cách của bạn.
+            Bạn chưa chọn món đồ nào vào giỏ. Hãy ghé qua phòng thử đồ để tìm trang phục phù hợp với phong cách của bạn.
           </p>
           <Link
-            href="/shop"
+            href="/"
             className="px-6 py-3 rounded-xl bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 text-xs font-semibold uppercase tracking-wider hover:opacity-90 transition shadow-sm"
           >
-            Khám phá bộ sưu tập ngay
+            Khám phá phòng thử đồ ngay
           </Link>
         </main>
       </div>
@@ -325,9 +325,6 @@ export default function CartPage() {
             <nav className="hidden md:flex items-center gap-4 text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400">
               <Link href="/" className="hover:text-black dark:hover:text-white transition">
                 Phòng Thử Đồ (Studio)
-              </Link>
-              <Link href="/shop" className="hover:text-black dark:hover:text-white transition">
-                Bộ Sưu Tập (Shop)
               </Link>
             </nav>
           </div>

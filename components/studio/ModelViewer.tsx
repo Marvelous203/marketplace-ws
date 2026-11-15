@@ -17,6 +17,8 @@ interface ModelViewerProps {
   onSelectCategory?: (cat: 'tops' | 'bottoms' | 'full' | 'shoes' | 'acc') => void;
 }
 
+const BASE_MODEL_IMAGE = '/models/base-character.jpg';
+
 export default function ModelViewer({
   looks,
   currentLookId,
@@ -44,6 +46,11 @@ export default function ModelViewer({
       lastLookIdRef.current = currentLookId;
     }
   }, [currentLookId]);
+
+  const getFigureUrl = (lookId: number) => {
+    if (lookId === 0) return BASE_MODEL_IMAGE;
+    return buildImageUrl(looks[lookId]?.imageFile || looks[0].imageFile, 1000);
+  };
 
   // Realism filter calculation
   const k = Math.max(0, (80 - realism) / 80);
@@ -75,12 +82,22 @@ export default function ModelViewer({
       >
         <div id="breath">
           <div id="figs">
+            {/* Always-present base character underneath */}
+            <div
+              className="fig"
+              style={{
+                backgroundImage: `url("${BASE_MODEL_IMAGE}")`,
+                zIndex: 1,
+              }}
+            />
+
             {/* Previous figure if wiping */}
             {isWiping && prevLookId !== null && looks[prevLookId] && (
               <div
                 className="fig"
                 style={{
-                  backgroundImage: `url("${buildImageUrl(looks[prevLookId].imageFile, 1000)}")`,
+                  backgroundImage: `url("${getFigureUrl(prevLookId)}")`,
+                  zIndex: 2,
                 }}
               />
             )}
@@ -90,7 +107,8 @@ export default function ModelViewer({
               key={incomingLookId}
               className={`fig ${isWiping ? 'in' : ''}`}
               style={{
-                backgroundImage: `url("${buildImageUrl(currentLook.imageFile, 1000)}")`,
+                backgroundImage: `url("${getFigureUrl(incomingLookId)}")`,
+                zIndex: 3,
               }}
               onAnimationEnd={() => {
                 setIsWiping(false);

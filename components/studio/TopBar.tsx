@@ -3,7 +3,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { showToast } from './Toast';
 
-export type TabKey = 'DNA' | 'BODY' | 'STYLE' | 'PERSONALITY' | 'STORY';
+export type TabKey = 'SHOP' | 'BODY' | 'STYLE' | 'UPLOAD' | 'STORY';
 
 interface TopBarProps {
   activeTab: TabKey;
@@ -20,10 +20,10 @@ interface TopBarProps {
 }
 
 const TABS: { key: TabKey; label: string }[] = [
-  { key: 'DNA', label: 'DNA' },
+  { key: 'SHOP', label: 'SHOP' },
   { key: 'BODY', label: 'BODY' },
   { key: 'STYLE', label: 'STYLE' },
-  { key: 'PERSONALITY', label: 'PERSONALITY' },
+  { key: 'UPLOAD', label: 'UPLOAD' },
   { key: 'STORY', label: 'STORY' },
 ];
 

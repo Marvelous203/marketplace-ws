@@ -12,7 +12,7 @@ export interface StudioState {
   height: number;         // 150-185, default 168
   build: number;          // 0-100, default 50
   framing: 'full' | 'mid' | 'portrait'; // default 'full'
-  activeTab: 'DNA' | 'BODY' | 'STYLE' | 'PERSONALITY' | 'STORY'; // default 'STYLE'
+  activeTab: 'SHOP' | 'BODY' | 'STYLE' | 'UPLOAD' | 'STORY'; // default 'STYLE'
   activeSideItem: string; // default 'Outfits'
   bx: number;
   by: number;
