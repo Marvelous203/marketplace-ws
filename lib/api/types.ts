@@ -20,6 +20,262 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/public/categories": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Lấy danh sách các danh mục giải pháp website */
+        get: operations["PublicCatalogController_getCategories"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/public/tags": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Lấy danh sách thẻ phân loại / bộ lọc */
+        get: operations["PublicCatalogController_getTags"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/public/features": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Lấy từ điển tính năng có thể lọc */
+        get: operations["PublicCatalogController_getFeatures"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/public/listings": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Tìm kiếm, lọc danh mục giải pháp website công khai */
+        get: operations["PublicCatalogController_getListings"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/public/listings/{slug}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Xem chi tiết giải pháp, demo, offers và bảng giá */
+        get: operations["PublicCatalogController_getListingBySlug"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/categories": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Admin: Danh sách tất cả danh mục (kể cả inactive) */
+        get: operations["AdminCatalogController_getAllCategories"];
+        put?: never;
+        /** Admin: Tạo mới danh mục ngành nghề */
+        post: operations["AdminCatalogController_createCategory"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/categories/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Admin: Cập nhật danh mục */
+        patch: operations["AdminCatalogController_updateCategory"];
+        trace?: never;
+    };
+    "/api/v1/admin/tags": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Admin: Tạo mới thẻ phân loại */
+        post: operations["AdminCatalogController_createTag"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/listings": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Admin: Tạo bản nháp giải pháp (Listing Draft) */
+        post: operations["AdminCatalogController_createListing"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/listings/{id}/offers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Admin: Thêm gói thương mại (Offer) cho giải pháp */
+        post: operations["AdminCatalogController_addOffer"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/listings/{id}/publish": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Admin: Phê duyệt và xuất bản giải pháp ra catalog công khai */
+        post: operations["AdminCatalogController_publishListing"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/listings/{id}/suspend": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Admin: Tạm ngưng xuất bản giải pháp kèm lý do */
+        post: operations["AdminCatalogController_suspendListing"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/public/community/categories": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Lấy danh sách các chuyên mục diễn đàn cộng đồng */
+        get: operations["PublicCommunityController_getCategories"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/public/community/threads": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Lấy danh sách bài viết / Bảng Cần giải pháp (Wanted) */
+        get: operations["PublicCommunityController_getThreads"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/public/community/threads/{slug}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Xem chi tiết bài viết, câu trả lời và thông tin yêu cầu */
+        get: operations["PublicCommunityController_getThreadBySlug"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/looks": {
         parameters: {
             query?: never;
@@ -211,6 +467,245 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        CategoryDto: {
+            id: string;
+            name: string;
+            slug: string;
+            description: string;
+            iconKey?: string;
+            parentId?: Record<string, never>;
+            sortOrder: number;
+            isActive: boolean;
+            children?: string[];
+        };
+        TagDto: {
+            id: string;
+            /** @example Next.js */
+            name: string;
+            /** @example nextjs */
+            slug: string;
+            /** @example TECH */
+            tagGroup: string;
+        };
+        FeatureDefinitionDto: {
+            id: string;
+            /** @example booking_engine */
+            key: string;
+            /** @example Đặt bàn / Đặt lịch trực tuyến */
+            label: string;
+            /** @enum {string} */
+            dataType: "BOOLEAN" | "TEXT" | "NUMBER";
+            /** @example Tính năng cốt lõi */
+            groupName: string;
+            isFilterable: boolean;
+        };
+        ListingMediaDto: {
+            id: string;
+            /** @example https://images.unsplash.com/photo-1517248135467-4c7edcad34c4 */
+            url: string;
+            /** @example Ảnh xem trước trang chủ */
+            altText: string;
+            /**
+             * @example IMAGE
+             * @enum {string}
+             */
+            mediaType: "IMAGE" | "VIDEO";
+            /** @example true */
+            isPrimary: boolean;
+        };
+        PriceSummaryDto: {
+            /** @example Từ */
+            label: string;
+            /** @example 3500000 */
+            amountMinor: number;
+            /** @example 3.500.000 ₫ */
+            formattedPrice: string;
+            /** @example VND */
+            currency: string;
+        };
+        ListingFeatureValueDto: {
+            /** @example booking_engine */
+            key: string;
+            /** @example Đặt bàn trực tuyến */
+            label: string;
+            /** @example true */
+            value: Record<string, never>;
+        };
+        DeliveryScopeDto: {
+            /**
+             * @example [
+             *       "Giao diện responsive",
+             *       "Bàn giao source code Next.js"
+             *     ]
+             */
+            included: string[];
+            /**
+             * @example [
+             *       "Hosting cao cấp",
+             *       "Viết bài chuẩn SEO"
+             *     ]
+             */
+            excluded: string[];
+            /**
+             * @example [
+             *       "Toàn bộ source code repository",
+             *       "File hướng dẫn README"
+             *     ]
+             */
+            deliverables: string[];
+        };
+        OfferPriceResponseDto: {
+            /** @example VND */
+            currency: string;
+            /**
+             * @description Integer minor units (VND: đồng)
+             * @example 3500000
+             */
+            amountMinor: number;
+            /** @example 3.500.000 ₫ */
+            formattedPrice: string;
+            /**
+             * @example ONE_TIME
+             * @enum {string}
+             */
+            billingInterval: "ONE_TIME" | "WEEK" | "MONTH" | "YEAR";
+        };
+        OfferResponseDto: {
+            id: string;
+            /** @example SOURCE_LICENSE */
+            code: string;
+            /** @example Bản quyền Mã nguồn */
+            name: string;
+            description: string;
+            /** @enum {string} */
+            fulfillmentType: "SOURCE_CODE" | "MANAGED_SERVICE" | "SAAS" | "CUSTOM_PROJECT";
+            /** @enum {string} */
+            pricingModel: "FIXED" | "STARTING_AT" | "QUOTE" | "SUBSCRIPTION";
+            /** @enum {string} */
+            status: "DRAFT" | "ACTIVE" | "INACTIVE" | "ARCHIVED";
+            requiresConsultation: boolean;
+            licenseSummary?: string;
+            deliveryScope: components["schemas"]["DeliveryScopeDto"];
+            /** @enum {string} */
+            billingInterval?: "ONE_TIME" | "WEEK" | "MONTH" | "YEAR";
+            price?: components["schemas"]["OfferPriceResponseDto"];
+        };
+        ListingDetailDto: {
+            id: string;
+            /** @example restaurant-pro */
+            slug: string;
+            /** @example Restaurant Pro — Mẫu Website Nhà hàng & Đặt bàn */
+            title: string;
+            /** @example Giải pháp website tối ưu cho nhà hàng, quán ăn, tích hợp đặt bàn và menu điện tử. */
+            shortDescription: string;
+            /** @enum {string} */
+            listingKind: "WEBSITE_TEMPLATE" | "BUSINESS_WEBSITE" | "LANDING_PAGE" | "ECOMMERCE" | "WEB_APPLICATION" | "SAAS_PRODUCT" | "CUSTOM_SERVICE" | "OTHER";
+            /** @enum {string} */
+            status: "DRAFT" | "SUBMITTED" | "IN_REVIEW" | "CHANGES_REQUESTED" | "REJECTED" | "PUBLISHED" | "SUSPENDED" | "ARCHIVED";
+            category: components["schemas"]["CategoryDto"];
+            /**
+             * @example {
+             *       "id": "plat-1",
+             *       "name": "Platform Official",
+             *       "slug": "platform",
+             *       "sellerType": "PLATFORM"
+             *     }
+             */
+            seller: Record<string, never>;
+            coverImage: components["schemas"]["ListingMediaDto"] | null;
+            tags: components["schemas"]["TagDto"][];
+            availableFulfillmentTypes: ("SOURCE_CODE" | "MANAGED_SERVICE" | "SAAS" | "CUSTOM_PROJECT")[];
+            priceSummary?: components["schemas"]["PriceSummaryDto"];
+            featured: boolean;
+            /** @example <p>Chi tiết giải pháp website nhà hàng cao cấp...</p> */
+            description: string;
+            /** @example https://demo.restaurant-pro.example.com */
+            demoUrl?: string;
+            /** @enum {string} */
+            previewMode: "EXTERNAL_LINK" | "APPROVED_EMBED" | "SCREENSHOTS";
+            gallery: components["schemas"]["ListingMediaDto"][];
+            features: components["schemas"]["ListingFeatureValueDto"][];
+            offers: components["schemas"]["OfferResponseDto"][];
+            publishedAt?: string;
+        };
+        CreateCategoryDto: {
+            /** @example Nhà hàng & Ẩm thực */
+            name: string;
+            /** @example food-beverage */
+            slug: string;
+            /** @example Mẫu website cho quán cafe, nhà hàng tiệc cưới */
+            description: string;
+            /** @example utensils */
+            iconKey?: string;
+            /** @example null */
+            parentId?: Record<string, never>;
+            /** @default 0 */
+            sortOrder: number;
+        };
+        UpdateCategoryDto: {
+            name?: string;
+            description?: string;
+            iconKey?: string;
+            isActive?: boolean;
+        };
+        CreateTagDto: {
+            /** @example Next.js */
+            name: string;
+            /** @example nextjs */
+            slug: string;
+            /** @example TECH */
+            tagGroup: string;
+        };
+        CreateOfferDto: {
+            /** @example SOURCE_LICENSE */
+            code: string;
+            /** @example Bản quyền Mã nguồn (Source Code) */
+            name: string;
+            /** @example Khách hàng nhận full source code Next.js và hướng dẫn tự triển khai. */
+            description: string;
+            /** @enum {string} */
+            fulfillmentType: "SOURCE_CODE" | "MANAGED_SERVICE" | "SAAS" | "CUSTOM_PROJECT";
+            /** @enum {string} */
+            pricingModel: "FIXED" | "STARTING_AT" | "QUOTE" | "SUBSCRIPTION";
+            /**
+             * @description Số tiền integer minor unit
+             * @example 3500000
+             */
+            amountMinor?: number;
+            /** @default VND */
+            currency: string;
+            /** @enum {string} */
+            billingInterval?: "ONE_TIME" | "WEEK" | "MONTH" | "YEAR";
+            /** @default false */
+            requiresConsultation: boolean;
+            /** @example Single Domain Standard Commercial License */
+            licenseSummary?: string;
+            deliveryScope?: components["schemas"]["DeliveryScopeDto"];
+        };
+        CreateListingDto: {
+            /** @example Restaurant Pro — Mẫu Website Nhà hàng */
+            title: string;
+            /** @example restaurant-pro */
+            slug: string;
+            /** @example Giải pháp website tối ưu cho nhà hàng... */
+            shortDescription: string;
+            /** @example <p>Mô tả chi tiết giải pháp...</p> */
+            description: string;
+            /** @example food-beverage */
+            categorySlug: string;
+            /**
+             * @default BUSINESS_WEBSITE
+             * @enum {string}
+             */
+            listingKind: "WEBSITE_TEMPLATE" | "BUSINESS_WEBSITE" | "LANDING_PAGE" | "ECOMMERCE" | "WEB_APPLICATION" | "SAAS_PRODUCT" | "CUSTOM_SERVICE" | "OTHER";
+            /** @example https://demo.example.com */
+            demoUrl?: string;
+            offers?: components["schemas"]["CreateOfferDto"][];
+        };
+        SuspendListingDto: {
+            /** @example Phát hiện khiếu nại bản quyền hình ảnh. */
+            reason: string;
+        };
         PieceDto: {
             /** @example Ribbed crop tank */
             name: string;
@@ -500,6 +995,354 @@ export interface operations {
             query?: never;
             header?: never;
             path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    PublicCatalogController_getCategories: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CategoryDto"][];
+                };
+            };
+        };
+    };
+    PublicCatalogController_getTags: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TagDto"][];
+                };
+            };
+        };
+    };
+    PublicCatalogController_getFeatures: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FeatureDefinitionDto"][];
+                };
+            };
+        };
+    };
+    PublicCatalogController_getListings: {
+        parameters: {
+            query?: {
+                /** @description Category slug */
+                category?: string;
+                /** @description Tag slug */
+                tag?: string;
+                fulfillment?: "SOURCE_CODE" | "MANAGED_SERVICE" | "SAAS" | "CUSTOM_PROJECT";
+                pricing?: "FIXED" | "STARTING_AT" | "QUOTE" | "SUBSCRIPTION";
+                /** @description Tìm kiếm theo từ khóa */
+                q?: string;
+                page?: number;
+                limit?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    PublicCatalogController_getListingBySlug: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ListingDetailDto"];
+                };
+            };
+        };
+    };
+    AdminCatalogController_getAllCategories: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    AdminCatalogController_createCategory: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateCategoryDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CategoryDto"];
+                };
+            };
+        };
+    };
+    AdminCatalogController_updateCategory: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateCategoryDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CategoryDto"];
+                };
+            };
+        };
+    };
+    AdminCatalogController_createTag: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateTagDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TagDto"];
+                };
+            };
+        };
+    };
+    AdminCatalogController_createListing: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateListingDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ListingDetailDto"];
+                };
+            };
+        };
+    };
+    AdminCatalogController_addOffer: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateOfferDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OfferResponseDto"];
+                };
+            };
+        };
+    };
+    AdminCatalogController_publishListing: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ListingDetailDto"];
+                };
+            };
+        };
+    };
+    AdminCatalogController_suspendListing: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SuspendListingDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ListingDetailDto"];
+                };
+            };
+        };
+    };
+    PublicCommunityController_getCategories: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    PublicCommunityController_getThreads: {
+        parameters: {
+            query?: {
+                /** @description Chuyên mục slug */
+                category?: string;
+                threadType?: "DISCUSSION" | "QUESTION" | "SHOWCASE" | "WANTED" | "ANNOUNCEMENT";
+                /** @description Từ khóa tìm kiếm */
+                q?: string;
+                limit?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    PublicCommunityController_getThreadBySlug: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                slug: string;
+            };
             cookie?: never;
         };
         requestBody?: never;

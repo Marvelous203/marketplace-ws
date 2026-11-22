@@ -1,21 +1,26 @@
 import type { Metadata } from 'next';
-import { Figtree, Syne } from 'next/font/google';
+import { Be_Vietnam_Pro, Lora } from 'next/font/google';
 import './globals.css';
 
-const figtree = Figtree({
-  subsets: ['latin'],
-  variable: '--font-figtree',
-  weight: ['300', '400', '500', '600'],
+const beVietnamPro = Be_Vietnam_Pro({
+  subsets: ['latin', 'vietnamese'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-sans',
+  display: 'swap',
 });
-const syne = Syne({
-  subsets: ['latin'],
-  variable: '--font-syne',
-  weight: ['700', '800'],
+
+const lora = Lora({
+  subsets: ['latin', 'vietnamese'],
+  weight: ['500', '600', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-serif',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: 'VELL — Create a Character',
-  description: 'Virtual fashion styling studio',
+  title: 'Phố Nghề — Sàn Giải pháp Website Tiêu chuẩn & Diễn đàn Kỹ thuật',
+  description:
+    'Nền tảng mua bản quyền mã nguồn website, thuê trọn gói và đăng ký Cloud SaaS. Giao diện mộc mạc, minh bạch chi phí, bảo chứng chất lượng cho doanh nghiệp Việt.',
 };
 
 export default function RootLayout({
@@ -24,8 +29,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${figtree.variable} ${syne.variable}`}>
-      <body>{children}</body>
+    <html lang="vi" className={`${beVietnamPro.variable} ${lora.variable}`}>
+      <body className="bg-[#FAF5EB] text-[#3A2418] antialiased selection:bg-[#E0A526]/30 selection:text-[#3A2418]">
+        {children}
+      </body>
     </html>
   );
 }
