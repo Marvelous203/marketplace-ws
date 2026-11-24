@@ -227,7 +227,160 @@ h1, h2, h3, .font-heading {
   box-shadow: 0 1px 3px rgba(0,0,0,0.25);
 }
 
-/* 8. Tôn trọng giảm chuyển động */
+/* 8. Hiệu ứng mô phỏng chữ viết (Typewriter & Hand-drawing simulation) */
+@keyframes blinkCursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  animation: blinkCursor 0.75s step-start infinite;
+  color: #A8412A;
+  font-weight: 900;
+  margin-left: 3px;
+  line-height: 1;
+}
+
+/* Con tem dập xuống (Stamp drop animation) */
+@keyframes stampDrop {
+  0% {
+    transform: scale(1.6) rotate(-8deg);
+    opacity: 0;
+  }
+  65% {
+    transform: scale(0.92) rotate(1deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(-1.5deg);
+    opacity: 1;
+  }
+}
+
+.stamp-drop-anim {
+  animation: stampDrop 380ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Đường mực vẽ dần (Ink stroke draw animation) */
+@keyframes drawInkLine {
+  from {
+    stroke-dashoffset: 500;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.ink-draw-line {
+  stroke-dasharray: 500;
+  stroke-dashoffset: 500;
+  animation: drawInkLine 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Nét mực highlight */
+.ink-highlight-wave {
+  background: linear-gradient(120deg, rgba(224, 165, 38, 0.18) 0%, rgba(224, 165, 38, 0.35) 100%);
+  border-bottom: 2px solid #E0A526;
+  border-radius: 2px;
+  padding: 0 4px;
+}
+
+/* 10. Chuyển động Mở Cửa Hàng (Shutter roll up / Storefront opening) */
+@keyframes shutterRollUp {
+  0% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+  85% {
+    transform: translateY(-98%);
+    opacity: 0.95;
+  }
+  100% {
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+  }
+}
+
+.shutter-opening {
+  animation: shutterRollUp 1.15s cubic-bezier(0.25, 1, 0.5, 1) 0.15s forwards;
+}
+
+/* 11. Hiệu ứng Pop nhẹ nhàng cho Biển hiệu & Khung Mockup khi đổi ngành */
+@keyframes signboardPop {
+  0% {
+    transform: scale(0.94) translateY(-4px) rotate(-1.2deg);
+    opacity: 0.75;
+  }
+  55% {
+    transform: scale(1.025) translateY(1px) rotate(0.8deg);
+    opacity: 1;
+  }
+  80% {
+    transform: scale(0.995) translateY(-0.5px) rotate(-0.3deg);
+  }
+  100% {
+    transform: scale(1) translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.signboard-pop-anim {
+  animation: signboardPop 320ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  transform-origin: top center;
+}
+
+@keyframes mockupPop {
+  0% {
+    transform: scale(0.96) translateY(5px);
+    opacity: 0.8;
+  }
+  60% {
+    transform: scale(1.012) translateY(-1.5px);
+    opacity: 1;
+  }
+  85% {
+    transform: scale(0.998) translateY(0.5px);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.mockup-pop-anim {
+  animation: mockupPop 340ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  transform-origin: center center;
+}
+
+/* Mái hiên Phố nghề cách điệu hình học */
+.awning-roof {
+  background: repeating-linear-gradient(
+    90deg,
+    #A8412A 0px,
+    #A8412A 28px,
+    #FFFDF9 28px,
+    #FFFDF9 56px
+  );
+  border-bottom: 3px solid #3A2418;
+  box-shadow: 0 4px 12px rgba(58, 36, 24, 0.12);
+}
+
+.awning-scallop {
+  background: repeating-linear-gradient(
+    90deg,
+    #A8412A 0px,
+    #A8412A 28px,
+    #FFFDF9 28px,
+    #FFFDF9 56px
+  );
+  height: 10px;
+  border-radius: 0 0 6px 6px;
+}
+
+/* 9. Tôn trọng giảm chuyển động */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

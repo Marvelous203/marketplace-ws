@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Suspense } from 'react';
 import MarketplaceNavbar from '@/components/marketplace/Navbar';
-import MadLibsHero from '@/components/marketplace/MadLibsHero';
+import StorefrontHero from '@/components/marketplace/StorefrontHero';
 import PictureWallSolutions, { ListingItemData } from '@/components/marketplace/PictureWallSolutions';
 import ScrollytellingSection from '@/components/marketplace/ScrollytellingSection';
 import {
@@ -65,8 +65,8 @@ async function HomePageContent() {
 
   return (
     <>
-      {/* 1. HERO TƯƠNG TÁC ĐIỀN CHỖ TRỐNG (MAD LIBS HERO) */}
-      <MadLibsHero />
+      {/* 1. HERO "GÕ TÊN CỬA HÀNG, THẤY WEBSITE CỦA BẠN" (MÁI HIÊN & CỬA CUỐN MỞ LÊN) */}
+      <StorefrontHero />
 
       {/* 2. MỤC LỤC LỚN CÁC PHỐ NGHỀ (STREET DIRECTORY INDEX) */}
       <section className="border-b border-[#E8DECE] bg-[#FFFDF9] py-14 lg:py-20">

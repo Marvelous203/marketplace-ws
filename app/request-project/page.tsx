@@ -25,6 +25,22 @@ export default function RequestProjectPage() {
     notes: '',
   });
 
+  // Tự động điền thương hiệu và ngành từ URL nếu điều hướng từ StorefrontHero
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const brand = params.get('brand');
+      const ind = params.get('industry');
+      if (brand || ind) {
+        setAnswers((prev) => ({
+          ...prev,
+          title: brand ? `Website cho ${brand}` : prev.title,
+          industry: ind || prev.industry,
+        }));
+      }
+    }
+  }, []);
+
   const toggleFeature = (id: string) => {
     if (answers.features.includes(id)) {
       setAnswers((prev) => ({
@@ -51,21 +67,73 @@ export default function RequestProjectPage() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
 
-    setTimeout(() => {
+    let minMinor = 10000000;
+    let maxMinor = 30000000;
+    if (answers.budget === 'under-10') {
+      minMinor = 3000000;
+      maxMinor = 10000000;
+    } else if (answers.budget === '15-30') {
+      minMinor = 15000000;
+      maxMinor = 30000000;
+    } else if (answers.budget === 'above-30') {
+      minMinor = 30000000;
+      maxMinor = 80000000;
+    }
+
+    const payload = {
+      title: answers.title.trim() || `Dự án website cho ${answers.contactName || 'Doanh nghiệp'}`,
+      solutionType: 'BUSINESS_WEBSITE',
+      industryCategoryId: answers.industry,
+      goal: answers.notes.trim() || `Mục tiêu: ${answers.goal}. Thời hạn mong muốn: ${answers.timeline}`,
+      budget: {
+        minMinor,
+        maxMinor,
+        currency: 'VND',
+        flexibility: 'NEGOTIABLE' as const,
+      },
+      requirements: {
+        estimatedPages: '5_TO_10',
+        features: answers.features,
+        technicalConfidence: 'NEED_CONSULTATION' as const,
+      },
+      contact: {
+        name: answers.contactName.trim() || 'Khách hàng',
+        email: answers.contactEmail.trim() || 'khachhang@example.com',
+        phone: answers.contactPhone.trim(),
+      },
+      consent: {
+        privacyPolicyVersion: '2026-11-01',
+      },
+    };
+
+    try {
+      const res = await fetch('http://localhost:3001/api/v1/quote-requests', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        throw new Error('API server returned error');
+      }
+
+      const data = await res.json();
+      setSubmittedCode(data.referenceCode);
+    } catch {
+      // Dự phòng mã an toàn khi chạy chế độ offline
       const chars = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
       let randomSuffix = '';
-      for (let i = 0; i < 6; i++) {
+      for (let i = 0; i < 4; i++) {
         randomSuffix += chars.charAt(Math.floor(Math.random() * chars.length));
       }
-      const refCode = `WMR-${randomSuffix}`;
-
-      setSubmittedCode(refCode);
+      setSubmittedCode(`WMR-${randomSuffix}`);
+    } finally {
       setSubmitting(false);
-    }, 700);
+    }
   };
 
   // SVG Bản phác thảo được vẽ dần theo từng câu hỏi

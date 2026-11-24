@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Be_Vietnam_Pro, Lora } from 'next/font/google';
 import './globals.css';
+import { AuthProvider } from '@/lib/context/AuthContext';
 
 const beVietnamPro = Be_Vietnam_Pro({
   subsets: ['latin', 'vietnamese'],
@@ -31,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="vi" className={`${beVietnamPro.variable} ${lora.variable}`}>
       <body className="bg-[#FAF5EB] text-[#3A2418] antialiased selection:bg-[#E0A526]/30 selection:text-[#3A2418]">
-        {children}
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );

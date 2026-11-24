@@ -20,6 +20,114 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/auth/login": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Đăng nhập người dùng bằng Email/Password hoặc Đăng nhập nhanh theo Role Mock
+         * @description Hỗ trợ 5 roles: super_admin, admin_owner, tenant, dev_freelance, guest. Trả về access token JWT và thông tin tài khoản.
+         */
+        post: operations["AuthController_login"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/auth/me": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Lấy thông tin người dùng hiện tại từ JWT Bearer Token */
+        get: operations["AuthController_getProfile"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/users": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Admin: Danh sách tất cả người dùng trong hệ thống kèm vai trò và thông tin Tenant */
+        get: operations["AdminUsersController_getAllUsers"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/users/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Admin: Chi tiết một người dùng cụ thể */
+        get: operations["AdminUsersController_getUserById"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/users/{id}/promote-owner": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Super Admin: Thăng cấp tài khoản Tenant thành Admin Owner của một Website/Tenant đã bàn giao
+         * @description Gán tenantId, websiteName, websiteDomain và các quyền quản trị cơ bản (editor, order_manager, cashier) cho người dùng.
+         */
+        post: operations["AdminUsersController_promoteOwner"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/tenants/{tenantId}/sub-roles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Admin: Gán hoặc gỡ sub_role cho nhân viên của Website/Tenant (editor, order_manager, cashier, support) */
+        post: operations["AdminUsersController_manageSubRoles"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/public/categories": {
         parameters: {
             query?: never;
@@ -276,6 +384,227 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/quote-requests": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Khách hàng hoặc khách vãng lai gửi yêu cầu dự án tùy biến (WM-042) */
+        post: operations["PublicRequestsController_createRequest"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/quote-requests/{refOrId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Khách hàng tra cứu tiến độ xử lý yêu cầu theo mã tra cứu (WMR-XXXX) hoặc ID */
+        get: operations["PublicRequestsController_getPublicRequest"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/quote-requests": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Admin / Staff: Danh sách yêu cầu dự án (Inbox) kèm bộ lọc và tìm kiếm (WM-043) */
+        get: operations["AdminRequestsController_getRequests"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/quote-requests/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Admin / Staff: Xem chi tiết yêu cầu, timeline hoạt động và ghi chú nội bộ */
+        get: operations["AdminRequestsController_getRequestById"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/quote-requests/{id}/assign": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Admin: Phân công nhân viên tư vấn / kỹ thuật phụ trách yêu cầu (WM-044) */
+        post: operations["AdminRequestsController_assignStaff"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/quote-requests/{id}/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Admin / Staff: Chuyển đổi trạng thái hồ sơ kiểm soát qua State Machine (WM-044, BR-18) */
+        post: operations["AdminRequestsController_transitionStatus"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/quote-requests/{id}/internal-notes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Staff: Thêm ghi chú trao đổi nội bộ (không hiển thị cho khách hàng) (WM-044) */
+        post: operations["AdminRequestsController_addInternalNote"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/quotations": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Admin: Khởi tạo bản thảo báo giá mới (WM-050) */
+        post: operations["AdminQuotationsController_createQuotation"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/quotations/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Admin: Xem chi tiết báo giá và lịch sử các phiên bản */
+        get: operations["AdminQuotationsController_getQuotationById"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/quotations/{id}/send": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Admin: Gửi báo giá cho khách hàng và đóng băng phiên bản (WM-051) */
+        post: operations["AdminQuotationsController_sendQuotation"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/quotations/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Khách hàng: Xem chi tiết báo giá qua đường link an toàn (WM-052) */
+        get: operations["PublicQuotationsController_getQuotationById"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/quotations/{id}/accept": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Khách hàng: Chấp thuận báo giá và chuyển sang đơn hàng (WM-052) */
+        post: operations["PublicQuotationsController_acceptQuotation"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/quotations/{id}/reject": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Khách hàng: Từ chối báo giá (WM-052) */
+        post: operations["PublicQuotationsController_rejectQuotation"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/looks": {
         parameters: {
             query?: never;
@@ -467,6 +796,101 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        LoginDto: {
+            /**
+             * @description Email đăng nhập của người dùng
+             * @example superadmin@marketplace.vn
+             */
+            email?: string;
+            /**
+             * @description Mật khẩu tài khoản (mặc định cho mock account: password123)
+             * @example password123
+             */
+            password?: string;
+            /**
+             * @description Đăng nhập nhanh theo Role mock (super_admin, admin_owner, tenant, dev_freelance, guest)
+             * @example super_admin
+             * @enum {string}
+             */
+            role?: "super_admin" | "admin_owner" | "tenant" | "dev_freelance" | "guest";
+        };
+        UserProfileDto: {
+            /** @example usr-super-admin */
+            id: string;
+            /** @example superadmin@marketplace.vn */
+            email: string;
+            /** @example Hệ Thống Super Admin */
+            name: string;
+            /**
+             * @example super_admin
+             * @enum {string}
+             */
+            role: "guest" | "tenant" | "dev_freelance" | "admin_owner" | "super_admin";
+            /** @example null */
+            tenantId?: Record<string, never>;
+            /** @example null */
+            websiteName?: Record<string, never>;
+            /** @example null */
+            websiteDomain?: Record<string, never>;
+            /** @example [] */
+            subRoles: unknown[][];
+            /** @example true */
+            isActive: boolean;
+        };
+        LoginResponseDto: {
+            /** @example eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9... */
+            accessToken: string;
+            /** @example Bearer */
+            tokenType: string;
+            /** @example 86400 */
+            expiresIn: number;
+            user: components["schemas"]["UserProfileDto"];
+        };
+        PromoteOwnerDto: {
+            /**
+             * @description Mã định danh Tenant của website (ví dụ: tenant-cosmetics-003)
+             * @example tenant-cosmetics-003
+             */
+            tenantId: string;
+            /**
+             * @description Tên thương hiệu / website được bàn giao
+             * @example Hana Cosmetics Online
+             */
+            websiteName: string;
+            /**
+             * @description Tên miền website đã kích hoạt
+             * @example hanacosmetics.vn
+             */
+            websiteDomain: string;
+            /**
+             * @description Các sub-roles ban đầu gán cho admin owner
+             * @example [
+             *       "editor",
+             *       "order_manager",
+             *       "cashier"
+             *     ]
+             */
+            initialSubRoles?: ("editor" | "order_manager" | "cashier" | "support")[];
+        };
+        ManageSubRolesDto: {
+            /**
+             * @description ID người dùng thuộc tenant cần phân quyền sub-role
+             * @example usr-tenant
+             */
+            userId: string;
+            /**
+             * @description Sub-role cụ thể cần gán hoặc gỡ
+             * @example editor
+             * @enum {string}
+             */
+            subRole: "editor" | "order_manager" | "cashier" | "support";
+            /**
+             * @description Hành động: grant (gán quyền) hoặc revoke (gỡ quyền)
+             * @example grant
+             * @enum {string}
+             */
+            action: "grant" | "revoke";
+        };
         CategoryDto: {
             id: string;
             name: string;
@@ -705,6 +1129,235 @@ export interface components {
         SuspendListingDto: {
             /** @example Phát hiện khiếu nại bản quyền hình ảnh. */
             reason: string;
+        };
+        BudgetDto: {
+            /** @example 10000000 */
+            minMinor?: number;
+            /** @example 30000000 */
+            maxMinor?: number;
+            /**
+             * @default VND
+             * @example VND
+             */
+            currency: string;
+            /**
+             * @default NEGOTIABLE
+             * @enum {string}
+             */
+            flexibility: "STRICT" | "NEGOTIABLE" | "NOT_SURE";
+        };
+        RequirementsDto: {
+            /** @example 5_TO_10 */
+            estimatedPages?: string;
+            /**
+             * @example [
+             *       "CMS",
+             *       "CONTACT_FORM",
+             *       "BOOKING"
+             *     ]
+             */
+            features: string[];
+            /**
+             * @example [
+             *       "EMAIL",
+             *       "ZALO"
+             *     ]
+             */
+            integrations?: string[];
+            /**
+             * @example [
+             *       "https://example.com/ref"
+             *     ]
+             */
+            designReferenceUrls?: string[];
+            /**
+             * @default NEED_CONSULTATION
+             * @enum {string}
+             */
+            technicalConfidence: "KNOW_EXACTLY" | "NEED_CONSULTATION" | "NO_PREFERENCE";
+            rawAnswers?: Record<string, never>;
+        };
+        ContactDto: {
+            /** @example Nguyễn Văn A */
+            name: string;
+            /** @example khachhang@example.com */
+            email: string;
+            /** @example +84912345678 */
+            phone?: string;
+            /** @example Cửa hàng Gốm Xưa */
+            company?: string;
+        };
+        ConsentDto: {
+            /** @example 2026-11-01 */
+            privacyPolicyVersion: string;
+            /** @default false */
+            marketingOptIn: boolean;
+        };
+        CreateRequestDto: {
+            /** @example a3d0d7ef-2f06-41d7-80f0-e13b157d0321 */
+            relatedListingId?: string;
+            /** @example f8d3c1a2-4b5e-49c7-9a1b-3e5f7a9c1b3d */
+            relatedOfferId?: string;
+            /** @example Website cho chuỗi nhà hàng Phố Cổ */
+            title: string;
+            /** @example food-beverage */
+            industryCategoryId?: string;
+            /** @example BUSINESS_WEBSITE */
+            solutionType: string;
+            /** @example Giới thiệu thực đơn món ăn, đặt bàn trực tuyến và tích hợp mã QR tại bàn. */
+            goal: string;
+            budget: components["schemas"]["BudgetDto"];
+            /** @example 2027-01-15 */
+            targetDate?: string;
+            requirements: components["schemas"]["RequirementsDto"];
+            contact: components["schemas"]["ContactDto"];
+            consent: components["schemas"]["ConsentDto"];
+        };
+        AssignStaffDto: {
+            /** @example staff-01 */
+            staffUserId: string;
+            /** @example Trần Tư Vấn Viên */
+            staffName: string;
+            /** @example admin */
+            actor?: string;
+        };
+        TransitionRequestDto: {
+            /** @enum {string} */
+            toStatus: "NEW" | "TRIAGED" | "IN_REVIEW" | "WAITING_CUSTOMER" | "QUOTATION_SENT" | "CONVERTED" | "CLOSED_WON" | "CLOSED_LOST" | "SPAM";
+            /** @example Đã hoàn tất phân loại và điều phối kỹ sư khảo sát */
+            reason: string;
+            /** @example admin-lead */
+            actor?: string;
+        };
+        AddInternalNoteDto: {
+            /** @example Khách hàng yêu cầu hỗ trợ thêm cổng thanh toán VNPay và bảo mật 2 lớp. */
+            body: string;
+            /** @example staff-user-id */
+            authorId?: string;
+            /** @example Nguyễn Kỹ Sư */
+            authorName?: string;
+        };
+        QuotationScopeDto: {
+            /**
+             * @example [
+             *       "Giao diện responsive đa thiết bị",
+             *       "Hệ thống quản trị thực đơn CMS",
+             *       "Tích hợp mã QR bàn"
+             *     ]
+             */
+            deliverables: string[];
+            /**
+             * @example [
+             *       "Thiết kế theo nhận diện Phố Nghề",
+             *       "Hỗ trợ cấu hình tên miền và máy chủ 12 tháng"
+             *     ]
+             */
+            included: string[];
+            /**
+             * @example [
+             *       "Phí cổng thanh toán bên thứ ba",
+             *       "Nội dung bài viết tự nhập"
+             *     ]
+             */
+            excluded: string[];
+            /**
+             * @example [
+             *       "Khách hàng cung cấp hình ảnh món ăn và logo gốc"
+             *     ]
+             */
+            assumptions?: string[];
+        };
+        PaymentScheduleItemDto: {
+            /** @example Đặt cọc khởi động dự án */
+            label: string;
+            /**
+             * @description Phần trăm
+             * @example 50
+             */
+            percent: number;
+        };
+        QuotationTermsDto: {
+            paymentSchedule: components["schemas"]["PaymentScheduleItemDto"][];
+            /**
+             * @description Số ngày bảo hành
+             * @example 30
+             */
+            warrantyDays: number;
+            /** @example Hỗ trợ kỹ thuật 24/7 trong suốt thời gian bảo hành và vận hành */
+            supportSummary: string;
+            /**
+             * @default QUOTE-TERMS-1.0
+             * @example QUOTE-TERMS-1.0
+             */
+            termsVersion: string;
+        };
+        QuotationLineDto: {
+            /**
+             * @example SERVICE
+             * @enum {string}
+             */
+            lineType: "SERVICE" | "LICENSE" | "HOSTING" | "MAINTENANCE";
+            /** @example Phát triển website đặt món & menu QR chuẩn Phố Nghề */
+            description: string;
+            /**
+             * @default 1
+             * @example 1
+             */
+            quantity: number;
+            /**
+             * @default GÓI
+             * @example GÓI
+             */
+            unit: string;
+            /**
+             * @description Đơn giá dạng integer minor units (VND)
+             * @example 18000000
+             */
+            unitPriceMinor: number;
+            /**
+             * @default 0
+             * @example 0
+             */
+            discountMinor: number;
+            /** @example STANDARD */
+            taxCode?: string;
+        };
+        CreateQuotationDto: {
+            /** @example req-001-phoco */
+            quoteRequestId: string;
+            /** @example org-platform-studio */
+            sellerOrganizationId: string;
+            /** @example Platform Studio & Nghệ Nhân Web */
+            sellerName?: string;
+            /**
+             * @default VND
+             * @example VND
+             */
+            currency: string;
+            /** @example 2026-12-15T23:59:59Z */
+            validUntil: string;
+            scope: components["schemas"]["QuotationScopeDto"];
+            terms: components["schemas"]["QuotationTermsDto"];
+            lines: components["schemas"]["QuotationLineDto"][];
+        };
+        AcceptQuotationDto: {
+            /** @example qv-001 */
+            quotationVersionId: string;
+            /** @example Trần Đình Trọng */
+            acceptanceName: string;
+            /** @example Tôi đồng ý với phạm vi công việc và tiến độ thanh toán nêu trên. */
+            acceptanceNote?: string;
+            /**
+             * @default QUOTE-TERMS-1.0
+             * @example QUOTE-TERMS-1.0
+             */
+            termsVersion: string;
+        };
+        RejectQuotationDto: {
+            /** @example qv-001 */
+            quotationVersionId: string;
+            /** @example Ngân sách vượt quá dự kiến ban đầu của chúng tôi. */
+            rejectionReason: string;
         };
         PieceDto: {
             /** @example Ribbed crop tank */
@@ -1000,6 +1653,231 @@ export interface operations {
         requestBody?: never;
         responses: {
             200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    AuthController_login: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["LoginDto"];
+            };
+        };
+        responses: {
+            /** @description Đăng nhập thành công */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LoginResponseDto"];
+                };
+            };
+            /** @description Dữ liệu yêu cầu không hợp lệ */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Sai email hoặc mật khẩu */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    AuthController_getProfile: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Thông tin hồ sơ người dùng */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UserProfileDto"];
+                };
+            };
+            /** @description Token không hợp lệ hoặc đã hết hạn */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    AdminUsersController_getAllUsers: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Danh sách người dùng */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UserProfileDto"][];
+                };
+            };
+            /** @description Chưa đăng nhập */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Không đủ quyền truy cập (Yêu cầu super_admin hoặc admin_owner) */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    AdminUsersController_getUserById: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description ID người dùng */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Chi tiết người dùng */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UserProfileDto"];
+                };
+            };
+            /** @description Không tìm thấy người dùng */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    AdminUsersController_promoteOwner: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description ID người dùng cần thăng cấp */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PromoteOwnerDto"];
+            };
+        };
+        responses: {
+            /** @description Thăng cấp thành công thành admin_owner */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UserProfileDto"];
+                };
+            };
+            /** @description Dữ liệu không hợp lệ hoặc tài khoản không thể thăng cấp */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Chỉ Super Admin mới có quyền thực hiện hành động này */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Không tìm thấy người dùng */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    AdminUsersController_manageSubRoles: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Mã định danh Tenant */
+                tenantId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ManageSubRolesDto"];
+            };
+        };
+        responses: {
+            /** @description Cập nhật sub-roles thành công */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UserProfileDto"];
+                };
+            };
+            /** @description Dữ liệu không hợp lệ */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Không đủ quyền quản trị tenant */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Không tìm thấy người dùng */
+            404: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -1347,6 +2225,295 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    PublicRequestsController_createRequest: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateRequestDto"];
+            };
+        };
+        responses: {
+            /** @description Yêu cầu được khởi tạo thành công và trả về mã tra cứu duy nhất */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    PublicRequestsController_getPublicRequest: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                refOrId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Dữ liệu tiến độ an toàn (không chứa ghi chú nội bộ) */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    AdminRequestsController_getRequests: {
+        parameters: {
+            query?: {
+                search?: string;
+                status?: "NEW" | "TRIAGED" | "IN_REVIEW" | "WAITING_CUSTOMER" | "QUOTATION_SENT" | "CONVERTED" | "CLOSED_WON" | "CLOSED_LOST" | "SPAM";
+                priority?: "LOW" | "NORMAL" | "HIGH" | "URGENT";
+                assignedToUserId?: string;
+                page?: number;
+                limit?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Danh sách yêu cầu phân trang */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    AdminRequestsController_getRequestById: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Toàn bộ thông tin hồ sơ yêu cầu */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    AdminRequestsController_assignStaff: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AssignStaffDto"];
+            };
+        };
+        responses: {
+            /** @description Phân công thành công */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    AdminRequestsController_transitionStatus: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TransitionRequestDto"];
+            };
+        };
+        responses: {
+            /** @description Chuyển trạng thái thành công */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    AdminRequestsController_addInternalNote: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AddInternalNoteDto"];
+            };
+        };
+        responses: {
+            /** @description Ghi chú được lưu thành công */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    AdminQuotationsController_createQuotation: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateQuotationDto"];
+            };
+        };
+        responses: {
+            /** @description Bản thảo báo giá được tạo thành công */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    AdminQuotationsController_getQuotationById: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Toàn bộ dữ liệu báo giá */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    AdminQuotationsController_sendQuotation: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Báo giá đã chuyển sang SENT và thông báo cho khách */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    PublicQuotationsController_getQuotationById: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Chi tiết báo giá phiên bản hiện hành */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    PublicQuotationsController_acceptQuotation: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AcceptQuotationDto"];
+            };
+        };
+        responses: {
+            /** @description Chấp thuận thành công, chuyển sang trạng thái ACCEPTED */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    PublicQuotationsController_rejectQuotation: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RejectQuotationDto"];
+            };
+        };
+        responses: {
+            /** @description Báo giá chuyển sang trạng thái REJECTED */
             200: {
                 headers: {
                     [name: string]: unknown;
